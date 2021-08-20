@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import axios from 'axios'
-import { useHistory } from "react-router";
 
 const initialValues = {
   username: '',
@@ -14,8 +13,6 @@ const Login = (props) => {
   const [error, setError] = useState("");
   const [credentials, setCredentials] = useState(initialValues)
 
-  const {push} = useHistory()
-
   function handleChange (e){
     setCredentials({
       ...credentials,
@@ -28,7 +25,7 @@ const Login = (props) => {
     axios.post(`http://localhost:5000/api/login`, credentials)
       .then(res => {
         localStorage.setItem('token', res.data.payload)
-        push('/bubble-page')
+        document.location.href = '/bubbles';
       })
       .catch(err => setError(err.message))
   }
@@ -46,7 +43,7 @@ const Login = (props) => {
             <label htmlFor='password'>Password: </label>
             <input id='password' name='password' value={credentials.password} onChange={handleChange}/>
           </div>
-          <button onClick={handleClick}>Login</button>
+          <button onClick={handleClick} id='submit'>Login</button>
         </form>
       </div>
 
