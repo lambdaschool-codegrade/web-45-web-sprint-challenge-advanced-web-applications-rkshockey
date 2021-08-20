@@ -24,7 +24,7 @@ const Login = () => {
   function handleClick (e){
     e.preventDefault()
     axios.post(`http://localhost:5000/api/login`, credentials)
-      .then(res => console.log(res))
+      .then(res => localStorage.setItem('token', res.data.payload))
       .catch(err => setError(err.message))
   }
 
