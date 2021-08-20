@@ -1,8 +1,9 @@
 import React from 'react';
 import MutationObserver from 'mutationobserver-shim';
 
-import { render, screen} from "@testing-library/react";
+import { queryByTestId, render, screen} from "@testing-library/react";
 import ColorList from './ColorList';
+import EditMenu from './EditMenu';
 
 const emptyColors = [
     {
@@ -35,4 +36,9 @@ test("Renders a list of colors without errors", () => {
 });
 
 test("Renders the EditForm when editing = true and does not render EditForm when editing = false", () => {
+    const {rerender} = render(<ColorList colors={testColors} editing={false}/>)
+    const editMenu = screen.queryByTestId('edit_menu')
+    expect(editMenu).not.toBeInTheDocument
+    rerender(<ColorList colors={testColors} editing={true}/>)
+    expect(editMenu).toBeInTheDocument
 });
