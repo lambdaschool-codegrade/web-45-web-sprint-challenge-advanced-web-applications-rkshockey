@@ -27,8 +27,8 @@ test("Executes handleDelete and toggleEdit property when the 'x' icon is clicked
     const fakeHandleDelete = jest.fn()
     const fakeToggleEdit = jest.fn()
 
-    render (<Color color={testColor}/>)
-    const button = getByTestId('delete')
+    render (<Color color={testColor} deleteColor={fakeHandleDelete} toggleEdit={fakeToggleEdit}/>)
+    const button = screen.getByTestId('delete')
     userEvent.click(button)
     expect(fakeHandleDelete).toBeCalledTimes(1)
     expect(fakeToggleEdit).toBeCalledTimes(1)
@@ -38,8 +38,8 @@ test("Executes setEditColor and toggleEdit property when color div is clicked", 
     const fakesetEditColor = jest.fn()
     const fakeToggleEdit = jest.fn()
 
-    render (<Color color={testColor}/>)
-    const div = getByTestId('color')
+    render (<Color color={testColor} setEditColor={fakesetEditColor} toggleEdit={fakeToggleEdit}/>)
+    const button = screen.getByTestId('color')
     userEvent.click(button)
     expect(fakesetEditColor).toBeCalledTimes(1)
     expect(fakeToggleEdit).toBeCalledTimes(1)
